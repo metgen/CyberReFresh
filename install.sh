@@ -66,6 +66,14 @@ if [ "$UID" -eq "$ROOT_UID" ]; then
   grep "GRUB_THEME=" /etc/default/grub 2>&1 >/dev/null && sed -i '/GRUB_THEME=/d' /etc/default/grub
 
   echo "GRUB_THEME=\"${THEME_DIR}/${THEME_NAME}/theme.txt\"" >> /etc/default/grub
+  
+  grep "GRUB_GFXMODE=" /etc/default/grub 2>&1 >/dev/null && sed -i '/GRUB_GFXMODE=/d' /etc/default/grub
+
+  echo "GRUB_GFXMODE=\"1920x1080,auto\"" >> /etc/default/grub
+  
+  grep "GRUB_TERMINAL=console" /etc/default/grub 2>&1 >/dev/null && sed -i "s|.*GRUB_TERMINAL=.*|#GRUB_TERMINAL=console|" /etc/default/grub
+
+grep "GRUB_TERMINAL_OUTPUT=console" /etc/default/grub 2>&1 >/dev/null && sed -i "s|.*GRUB_TERMINAL_OUTPUT=.*|#GRUB_TERMINAL_OUTPUT=console|" /etc/default/grub
 
   # Update grub config
   echo -e "Updating grub..."
